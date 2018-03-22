@@ -1,0 +1,49 @@
+Part-of-speech tags used
+(http://bioie.ldc.upenn.edu/wiki/index.php/POS_tags, http://www.ircs.upenn.edu/arabic/manuals/tagguide.pdf)
+
+Tag 	Definition
+---	--------------------------------------------------------------
+``	Quotation marks
+''	Quotation marks
+,	comma
+:	colon
+.	sentence closer (. ; ? *)
+
+(	left paren
+)	right paren
+$	Dollar sign
+#	#
+CC 	coordinating conjunction (and, or)
+CD 	cardinal numeral (one, two, 2, etc.)
+DT 	singular determiner/quantifier (this, that)
+EX 	existential there
+FW 	foreign word (hyphenated before regular tag)
+IN 	preposition
+JJ 	adjective
+JJR 	comparative adjective
+JJS 	semantically superlative adjective (chief, top)
+MD 	modal auxiliary (can, should, will)
+NN 	singular or mass noun
+NNP	Noun, singular proper
+NNPS	Noun, plural proper
+O	Unknown
+PDT	Predeterminer
+POS	Possessive
+PRP	Personal pronoun
+PRP$	Personal pronoun, possessive
+RB 	adverb
+RBR 	comparative adverb
+RP 	adverb/particle (about, off, up)
+SYM	symbol (for example * =)
+TO 	infinitive marker to
+UH 	interjection, exclamation
+VB 	verb, base form
+VBD 	verb, past tense
+VBG 	verb, present participle/gerund
+VBN 	verb, past participle
+VBP	Verb, present tense, not 3rd person singular
+VBZ 	Verb, present tense, 3rd person singular
+WDT 	wh- determiner (what, which)
+WP	Wh-pronoun (what, who and whom)
+WP$ 	possessive wh- pronoun (whose)
+WRB 	wh- adverb (how, where, when)
