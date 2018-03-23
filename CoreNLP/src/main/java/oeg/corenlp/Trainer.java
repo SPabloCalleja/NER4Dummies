@@ -11,35 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import edu.stanford.nlp.ie.*;
-import edu.stanford.nlp.ie.crf.CRFClassifierFloat;
-import edu.stanford.nlp.ie.crf.CRFClassifierNoisyLabel;
-import edu.stanford.nlp.ie.crf.CRFClassifierNonlinear;
-import edu.stanford.nlp.ie.crf.CRFClassifierWithDropout;
-import edu.stanford.nlp.ie.crf.CRFClassifierWithLOP;
-import edu.stanford.nlp.io.IOUtils;
-import edu.stanford.nlp.io.RuntimeIOException;
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.math.ArrayMath;
-import edu.stanford.nlp.objectbank.ObjectBank;
-import edu.stanford.nlp.optimization.*;
-import edu.stanford.nlp.optimization.Function;
-import edu.stanford.nlp.sequences.*;
-import edu.stanford.nlp.stats.ClassicCounter;
-import edu.stanford.nlp.stats.Counter;
-import edu.stanford.nlp.stats.TwoDimensionalCounter;
-import edu.stanford.nlp.util.*;
-import edu.stanford.nlp.util.logging.Redwood;
 
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.regex.*;
-import java.util.stream.Collectors;
-import java.util.zip.GZIPOutputStream;
 /**
  *
  * @author pcalleja
