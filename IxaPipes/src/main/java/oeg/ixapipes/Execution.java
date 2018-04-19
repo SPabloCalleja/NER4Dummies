@@ -33,6 +33,8 @@ import ixa.kaflib.Tree;
 import ixa.kaflib.TreeNode;
 import ixa.kaflib.WF;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
@@ -228,5 +230,33 @@ public class Execution {
        
     
     }
+    
+    
+    
+    public static String readFile(String FilePath) throws IOException{
+    
+        BufferedReader br = null;
+        File fr = new File(FilePath);
+
+  
+        br =   new BufferedReader(new InputStreamReader(new FileInputStream(fr), "UTF8"));
+
+        String Line;
+        StringBuffer buffer=new StringBuffer();
+
+        while ((Line = br.readLine()) != null) {
+           
+            buffer.append(Line +"\n");
+        }
+
+        br.close();
+        
+        System.out.println(buffer.toString());
+        
+        return buffer.toString();
+
+
+    }
+    
 
 }

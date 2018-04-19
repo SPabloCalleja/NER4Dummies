@@ -30,16 +30,23 @@ public class Trainer {
     
     
     
+    private static int Iterations;
+    private static int Cutoff;
+    
     
     public static void main (String [] args){
     
+        
+        Iterations= 70;
+        Cutoff=1;
     
-        createModel("resources/en-ner-person.train","models/my-ner-person.bin",70,1,"en");
+        
+        createModel("resources/AnnotatedSentences.txt","models/My-Model-Example.bin","en");
     
     }
     
     
-    public static void createModel(String InputFileName, String OutputModelFileName, int Iterations,int Cutoff, String lang){
+    public static void createModel(String InputFileName, String OutputModelFileName, String lang){
     
            // reading training data
         InputStreamFactory in = null;

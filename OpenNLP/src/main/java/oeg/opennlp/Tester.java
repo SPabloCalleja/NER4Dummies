@@ -5,9 +5,13 @@
  */
 package oeg.opennlp;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
  
@@ -21,42 +25,47 @@ import opennlp.tools.util.Span;
 public class Tester {
     
     
+    private static String TokenizerModel;
+    
+    private static String NEModel;
     
     public static void main (String [] args) throws IOException{
-    
-        String [] tokens= tokenizeOpenNLP("John is 26 years old.", "models\\en-token.bin");
         
-        Span [] entities=findName( tokens, "models\\en-ner-person.bin");
+        
+        
+        TokenizerModel="models\\en-token.bin";
+        NEModel="models\\en-ner-date.bin";
+    
+        
+        //String sentence="Malcom Young (born 31 March 1955) is an Australian guitarist";
+        String sentence=readFile("../CORPORA/Plain/Wikipedia/en/Angus Young.txt");
+        
+        String [] tokens= tokenize(sentence);
+        
+        Span [] entities= namedEntityRecognition( tokens);
     
     }
     
     
-    public static String[] tokenizeOpenNLP(String Sentence, String Model){
+    public static String[] tokenize(String Sentence) throws IOException{
    
         InputStream modelIn = null;
-        String[] tokensOut = null;
+        String [] tokensOut = null;
 
-        try {
-            modelIn = new FileInputStream(Model);
-            TokenizerModel model = new TokenizerModel(modelIn);
-            TokenizerME tokenizer = new TokenizerME(model);
-            String tokens[] = tokenizer.tokenize(Sentence);
-            //double tokenProbs[] = tokenizer.getTokenProbabilities();
-            tokensOut = tokens;
-            // System.out.println("Token\t: Probability\n-------------------------------");
-            for (int i = 0; i < tokens.length; i++) {
-                //System.out.println(tokens[i]+"\t: "+tokenProbs[i]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (modelIn != null) {
-                try {
-                    modelIn.close();
-                } catch (IOException e) {
-                }
-            }
-        }
+        modelIn = new FileInputStream(TokenizerModel);
+        // Model
+        TokenizerModel model = new TokenizerModel(modelIn);
+
+        // Tokenizer
+        TokenizerME tokenizer = new TokenizerME(model);
+
+        // Get Tokens
+        String tokens[] = tokenizer.tokenize(Sentence);
+
+        tokensOut = tokens;
+
+
+       
         return tokensOut;
 
 
@@ -65,27 +74,28 @@ public class Tester {
     
    
     
-    public static Span[] findName(String [] sentence, String Model) throws IOException {
-        InputStream is = new FileInputStream(Model);
- 
+    public static Span[] namedEntityRecognition(String [] tokens )throws IOException {
+        
         // load the model from file
+        InputStream is = new FileInputStream(NEModel);
+ 
+        //  NE model
         TokenNameFinderModel model = new TokenNameFinderModel(is);
         is.close();
  
         // feed the model to name finder class
         NameFinderME nameFinder = new NameFinderME(model);
  
- 
-        Span[] nameSpans = nameFinder.find(sentence);
+        // Get entities
+        Span[] nameSpans = nameFinder.find(tokens);
  
         // nameSpans contain all the possible entities detected
         for(Span s: nameSpans){
-            System.out.print(s.toString());
+            System.out.print(s.toString()); // type
             System.out.print("  :  ");
-            // s.getStart() : contains the start index of possible name in the input string array
-            // s.getEnd() : contains the end index of the possible name in the input string array
-            for(int index=s.getStart();index<s.getEnd();index++){
-                System.out.print(sentence[index]+" ");
+           
+            for(int index=s.getStart();index<s.getEnd();index++){ // text
+                System.out.print(tokens[index]+" ");
             }
             System.out.println();
         }
@@ -93,6 +103,32 @@ public class Tester {
         return nameSpans;
     }
     
+    
+    
+    public static String readFile(String FilePath) throws IOException{
+    
+        BufferedReader br = null;
+        File fr = new File(FilePath);
+
+  
+        br =   new BufferedReader(new InputStreamReader(new FileInputStream(fr), "UTF8"));
+
+        String Line;
+        StringBuffer buffer=new StringBuffer();
+
+        while ((Line = br.readLine()) != null) {
+           
+            buffer.append(Line +"\n");
+        }
+
+        br.close();
+        
+        System.out.println(buffer.toString());
+        
+        return buffer.toString();
+
+
+    }
     
     
     

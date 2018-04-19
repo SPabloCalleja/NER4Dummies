@@ -23,38 +23,31 @@ public class Trainer {
     public static void main(String [] args) throws IOException, Exception{
     
     
-        // NORMAL
-  
-        String [] ar= {"-prop","resources/austen.prop"};
+        
+    
+        String PropFile = "resources/myprop.prop";
+        String TrainingFile = "resources/jane-austen-emma-ch1.tsv"; //"resources/esp.train";//
+        String ModelOutputFile = "models/myModel.gz";
+        
+        createProps( PropFile,  TrainingFile,  ModelOutputFile);
+        
+        String [] ar= {"-prop",PropFile};
         CRFClassifier.main(ar);
         
-    
-        // YOUR OWN PATHS AND PROPERTIES
-        String PropFile = "resources/myprop.prop";
-        String InputFile = "resources/jane-austen-emma-ch1.tsv";
-        String ModelOutputFile = "models/myownmodel.gz";
         
-        createProps( PropFile,  InputFile,  ModelOutputFile);
-        String [] ar2= {"-prop",PropFile};
-        CRFClassifier.main(ar2);
-        
-    
-        // command line
-        //java -cp D:/ProyectosJava/HNER/ICIJ/ICIJ-Projects/resources/GateHome/Plugins/Stanford_CoreNLP/ner\stanford-ner.jar edu.stanford.nlp.ie.crf.CRFClassifier -prop D:/ProyectosJava/HNER/ICIJ/ICIJ-Projects/resources/GateHome/Plugins/Stanford_CoreNLP/ner\properties.prop
-
     }
     
     
     
     
-    public static void createProps(String PropertiesFile, String InputFile, String Model) throws UnsupportedEncodingException, FileNotFoundException {
+    public static void createProps(String PropertiesFile, String TrainingFile, String ModelOutputName) throws UnsupportedEncodingException, FileNotFoundException {
 
         String s = "#location of the training file\n"
-                + "trainFile =" +InputFile+"\n" //INputFile.tsv
+                + "trainFile =" +TrainingFile+"\n" //INputFile.tsv
                 + "#location where you would like to save (serialize to) your\n"
                 + "#classifier; adding .gz at the end automatically gzips the file,\n"
                 + "#making it faster and smaller\n"
-                + "serializeTo ="+Model+"\n" //ner-model.ser.gz
+                + "serializeTo ="+ModelOutputName+"\n" //ner-model.ser.gz
                 + "\n"
                 + "#structure of your training file; this tells the classifier\n"
                 + "#that the word is in column 0 and the correct answer is in\n"
