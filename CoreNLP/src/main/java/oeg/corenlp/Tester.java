@@ -36,7 +36,7 @@ public class Tester {
 
 
         
-        String myModel="models/ner-model.Companies.gz"; // from files -- my own model
+        String PanapaPapersModel="models/ner-model.Companies.gz"; // from files -- my own model
         String englishNERModel="models//english.muc.7class.distsim.crf.ser.gz"; // from files
         String posEnglishModel="edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger";
         
